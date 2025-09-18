@@ -13553,7 +13553,7 @@ const renderLotteryResults = (results, searchTerm) => {
     lotteryResultsContainer.innerHTML = '';
     lotteryResultsPlaceholder.style.display = results.length === 0 ? 'block' : 'none';
     lotteryResultsPlaceholder.textContent = 'هیچ ئەنجامێک نەدۆزرایەوە.';
-    const searchRegex = searchTerm && searchTerm.length >= 3 ? new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi') : null;
+    const searchRegex = searchTerm && searchTerm.length >= 7 ? new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi') : null;
 
     results.forEach((person, index) => {
         const card = document.createElement('div');
