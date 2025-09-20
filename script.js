@@ -19,7 +19,38 @@ document.addEventListener('DOMContentLoaded', () => {
     lotteryBtn.addEventListener('click', () => switchView('lottery-view'));
 
     // --- Helper Functions ---
-    const normalizeNumerals = (str) => str ? String(str).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)) : '';
+    const normalizeNumerals = (str) => {
+    if (!str) return '';
+    
+    return String(str)
+        // گۆڕینی ژمارە عەرەبییەکان بۆ ئینگلیزی
+        .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+        // گۆڕینی ژمارە فارسییەکان بۆ ئینگلیزی
+        .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+        // گۆڕینی پیتە جیاوازەکانی کوردی/عەرەبی/فارسی
+        .replace(/[یيئ]/g, 'ي')           // هەموو جۆرەکانی ی بۆ ی عەرەبی
+        .replace(/[کكک]/g, 'ك')           // هەموو جۆرەکانی ک بۆ ک عەرەبی
+        .replace(/[ھهة]/g, 'ه')           // هەموو جۆرەکانی ه بۆ ه عەرەبی
+        .replace(/[ەة]/g, 'ه')            // ە کوردی و ة عەرەبی بۆ ه
+        .replace(/[وؤ]/g, 'و')           // هەموو جۆرەکانی و
+        .replace(/[إأآا]/g, 'ا')         // هەموو جۆرەکانی ئەلف
+        .replace(/[تط]/g, 'ت')            // ت و ط
+        .replace(/[ثس]/g, 'س')            // ث و س
+        .replace(/[حخ]/g, 'ح')            // ح و خ
+        .replace(/[ذد]/g, 'د')            // ذ و د
+        .replace(/[زذ]/g, 'ز')            // ز و ذ
+        .replace(/[صض]/g, 'ص')            // ص و ض
+        .replace(/[ظذ]/g, 'ظ')            // ظ و ذ
+        .replace(/[غ]/g, 'غ')            // غ و ق
+        .replace(/[ڕ]/g, 'ر')            // ڕ کوردی و ر عەرەبی
+        .replace(/[ڵل]/g, 'ل')            // ڵ کوردی و ل عەرەبی
+        .replace(/[ێئ]/g, 'ێ')          // پیتەکانی ێ
+           // لابردنی هەموو بۆشاییە زیادەکان
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+};
+    // const normalizeNumerals = (str) => str ? String(str).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)) : '';
     const getUniqueValues = (data, key) => [...new Set(data.map(item => item[key]))].sort((a, b) => String(a).localeCompare(String(b), 'ku'));
     const populateDropdown = (container, options, allValueText) => { container.innerHTML = `<div class="custom-dropdown-option selected" data-value="all">${allValueText}</div>`; options.forEach(option => { container.innerHTML += `<div class="custom-dropdown-option" data-value="${option}">${option}</div>`; }); };
     const setupDropdown = (toggleId, optionsId, stateCallback) => {
@@ -5851,7 +5882,7 @@ document.addEventListener('DOMContentLoaded', () => {
   {"birthYear":2003,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"جوار قورنة","centerNumber":1285,"education":"بەكالوريوس","firstNmae":"هيلين","gender":"مێ","id":262,"lastName":"عبدالله","lotteryNumber":281837,"middleName":"محمد","result":"فائز"},
   {"birthYear":1990,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"جوار قورنة","centerNumber":1285,"education":"دبلوم","firstNmae":"دةرون","gender":"مێ","id":263,"lastName":"حمد","lotteryNumber":282940,"middleName":"قادر","result":"فائز"},
   {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"جوار قورنة","centerNumber":1285,"education":"بەكالوريوس","firstNmae":"دةرياز","gender":"مێ","id":264,"lastName":"عبدالله","lotteryNumber":276512,"middleName":"محمد","result":"فائز"},
-  {"birthYear":2002,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"جوار قورنة","centerNumber":1285,"education":"بەكالوريوس","firstNmae":"با","gender":"مێ","id":265,"lastName":"مصطفى","lotteryNumber":269083,"middleName":"محمد","result":"فائز"},
+  {"birthYear":2002,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"جوار قورنة","centerNumber":1285,"education":"بەكالوريوس","firstNmae":"باڵا","gender":"مێ","id":265,"lastName":"مصطفى","lotteryNumber":269083,"middleName":"محمد","result":"فائز"},
   {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"جوار قورنة","centerNumber":1285,"education":"بەكالوريوس","firstNmae":"ئةفين","gender":"مێ","id":266,"lastName":"قادر","lotteryNumber":290459,"middleName":"ابراهيم","result":"فائز"},
   {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"جوار قورنة","centerNumber":1285,"education":"بەكالوريوس","firstNmae":"شين","gender":"مێ","id":267,"lastName":"رسول","lotteryNumber":317866,"middleName":"قادر","result":"فائز"},
   {"birthYear":1992,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"جوار قورنة","centerNumber":1285,"education":"بەكالوريوس","firstNmae":"مارية","gender":"مێ","id":268,"lastName":"محمود","lotteryNumber":302755,"middleName":"حمد","result":"فائز"},
@@ -6564,17 +6595,17 @@ document.addEventListener('DOMContentLoaded', () => {
   {"birthYear":1977,"category":"فەرمانبەری حکومەت","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"محمد","gender":"نێر","id":297,"lastName":"خضر","lotteryNumber":656644,"middleName":"عثمان","result":"فائز"},
   {"birthYear":1988,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"سوران","gender":"نێر","id":298,"lastName":"عبدالله","lotteryNumber":45089,"middleName":"سعيد","result":"فائز"},
   {"birthYear":1984,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ناسكة","gender":"مێ","id":299,"lastName":"حسن","lotteryNumber":104687,"middleName":"سوارة","result":"فائز"},
-  {"birthYear":2003,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"زريان","gender":"مێ","id":300,"lastName":"عبدالله","lotteryNumber":87271,"middleName":"محمد","result":"فائز"},
+  {"birthYear":2003,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"زريان","gender":"مێ","id":300,"lastName":"عبدالله","lotteryNumber":87271,"middleName":"محمد","result":"فائز"},
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"زريان","gender":"مێ","id":301,"lastName":"عمر","lotteryNumber":95528,"middleName":"حسين","result":"فائز"},
   {"birthYear":2005,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ئارا","gender":"نێر","id":302,"lastName":"علي","lotteryNumber":95908,"middleName":"هندرين","result":"فائز"},
   {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"كةيوان","gender":"نێر","id":303,"lastName":"عو","lotteryNumber":150944,"middleName":"مصطفى","result":"فائز"},
   {"birthYear":1991,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"نيركس","gender":"مێ","id":304,"lastName":"قادر","lotteryNumber":164877,"middleName":"خضر","result":"فائز"},
-  {"birthYear":1996,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"هيرو","gender":"مێ","id":305,"lastName":"حامد","lotteryNumber":166068,"middleName":"عدنان","result":"فائز"},
+  {"birthYear":1996,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"هيرو","gender":"مێ","id":305,"lastName":"حامد","lotteryNumber":166068,"middleName":"عدنان","result":"فائز"},
   {"birthYear":1993,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ريزان","gender":"مێ","id":306,"lastName":"مجيد","lotteryNumber":168418,"middleName":"حسن","result":"فائز"},
   {"birthYear":1989,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"باهو","gender":"نێر","id":307,"lastName":"قادر","lotteryNumber":170087,"middleName":"دلشاد","result":"فائز"},
   {"birthYear":1994,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"علي","gender":"نێر","id":308,"lastName":"سيلمان","lotteryNumber":198310,"middleName":"زرار","result":"فائز"},
-  {"birthYear":1995,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شيرين","gender":"مێ","id":309,"lastName":"حمةسور","lotteryNumber":177594,"middleName":"قادر","result":"فائز"},
-  {"birthYear":2004,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"علي","gender":"نێر","id":310,"lastName":"علي","lotteryNumber":181903,"middleName":"عبدالله","result":"فائز"},
+  {"birthYear":1995,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شيرين","gender":"مێ","id":309,"lastName":"حمةسور","lotteryNumber":177594,"middleName":"قادر","result":"فائز"},
+  {"birthYear":2004,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"علي","gender":"نێر","id":310,"lastName":"علي","lotteryNumber":181903,"middleName":"عبدالله","result":"فائز"},
   {"birthYear":2003,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"سازكار","gender":"مێ","id":311,"lastName":"صوفى بابكر","lotteryNumber":215685,"middleName":"ازاد","result":"فائز"},
   {"birthYear":1994,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"كانى","gender":"مێ","id":312,"lastName":"ابراهيم","lotteryNumber":236669,"middleName":"اسماعيل","result":"فائز"},
   {"birthYear":1998,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"ئامادەی","firstNmae":"بةيوند","gender":"نێر","id":313,"lastName":"احمد","lotteryNumber":272340,"middleName":"اسماعيل","result":"فائز"},
@@ -6582,36 +6613,36 @@ document.addEventListener('DOMContentLoaded', () => {
   {"birthYear":1986,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"شةمال","gender":"نێر","id":315,"lastName":"هومر","lotteryNumber":275689,"middleName":"علي","result":"فائز"},
   {"birthYear":1998,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"فه","gender":"مێ","id":316,"lastName":"خضر","lotteryNumber":247175,"middleName":"رزكار","result":"فائز"},
   {"birthYear":2004,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"ئامادەی","firstNmae":"سارا","gender":"مێ","id":317,"lastName":"حاجي","lotteryNumber":278028,"middleName":"محمد","result":"فائز"},
-  {"birthYear":1993,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"هاوزين","gender":"مێ","id":318,"lastName":"حمدامين","lotteryNumber":267624,"middleName":"ظاهير","result":"فائز"},
-  {"birthYear":2002,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سيفان","gender":"مێ","id":319,"lastName":"رسول","lotteryNumber":268652,"middleName":"عزيز","result":"فائز"},
+  {"birthYear":1993,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"هاوزين","gender":"مێ","id":318,"lastName":"حمدامين","lotteryNumber":267624,"middleName":"ظاهير","result":"فائز"},
+  {"birthYear":2002,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سيفان","gender":"مێ","id":319,"lastName":"رسول","lotteryNumber":268652,"middleName":"عزيز","result":"فائز"},
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ساوين","gender":"مێ","id":320,"lastName":"حمة","lotteryNumber":269450,"middleName":"عزيز","result":"فائز"},
-  {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شه","gender":"مێ","id":321,"lastName":"عبدالقادر","lotteryNumber":304676,"middleName":"على","result":"فائز"},
+  {"birthYear":1997,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شه","gender":"مێ","id":321,"lastName":"عبدالقادر","lotteryNumber":304676,"middleName":"على","result":"فائز"},
   {"birthYear":2005,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"تةر","gender":"مێ","id":322,"lastName":"جل","lotteryNumber":310625,"middleName":"حتم","result":"فائز"},
-  {"birthYear":1993,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"بةخشان","gender":"مێ","id":323,"lastName":"حسن","lotteryNumber":315096,"middleName":"عبدالله","result":"فائز"},
+  {"birthYear":1993,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"بةخشان","gender":"مێ","id":323,"lastName":"حسن","lotteryNumber":315096,"middleName":"عبدالله","result":"فائز"},
   {"birthYear":1992,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"كيابةند","gender":"مێ","id":324,"lastName":"ممند","lotteryNumber":315135,"middleName":"حسن","result":"فائز"},
-  {"birthYear":2005,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ليزا","gender":"مێ","id":325,"lastName":"احمد","lotteryNumber":319808,"middleName":"اسماعيل","result":"فائز"},
+  {"birthYear":2005,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ليزا","gender":"مێ","id":325,"lastName":"احمد","lotteryNumber":319808,"middleName":"اسماعيل","result":"فائز"},
   {"birthYear":1996,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ريزنة","gender":"مێ","id":326,"lastName":"صالح","lotteryNumber":306619,"middleName":"نجم","result":"فائز"},
-  {"birthYear":1998,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"كارمند","gender":"نێر","id":327,"lastName":"رحيم","lotteryNumber":311157,"middleName":"مصطفى","result":"فائز"},
+  {"birthYear":1998,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"كارمند","gender":"نێر","id":327,"lastName":"رحيم","lotteryNumber":311157,"middleName":"مصطفى","result":"فائز"},
   {"birthYear":2005,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ريسا","gender":"مێ","id":328,"lastName":"رسول","lotteryNumber":320846,"middleName":"كارزان","result":"فائز"},
   {"birthYear":1987,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"فريدة","gender":"مێ","id":329,"lastName":"احمد","lotteryNumber":349780,"middleName":"بيروت","result":"فائز"},
   {"birthYear":1999,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"سارا","gender":"مێ","id":330,"lastName":"عزيز","lotteryNumber":321854,"middleName":"عبدالله","result":"فائز"},
-  {"birthYear":2005,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ئايرين","gender":"مێ","id":331,"lastName":"علي","lotteryNumber":328823,"middleName":"ئازاد","result":"فائز"},
-  {"birthYear":1992,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"بةهار","gender":"مێ","id":332,"lastName":"عبدالله","lotteryNumber":330293,"middleName":"علي","result":"فائز"},
-  {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شاجوان","gender":"مێ","id":333,"lastName":"احمد","lotteryNumber":325028,"middleName":"طه","result":"فائز"},
-  {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شةوبو","gender":"مێ","id":334,"lastName":"عبدالقادر","lotteryNumber":298840,"middleName":"على","result":"فائز"},
-  {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"نةبةز","gender":"نێر","id":335,"lastName":"علي","lotteryNumber":333699,"middleName":"ازاد","result":"فائز"},
-  {"birthYear":1998,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سروشت","gender":"مێ","id":336,"lastName":"حمد","lotteryNumber":335257,"middleName":"مصطفى","result":"فائز"},
+  {"birthYear":2005,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ئايرين","gender":"مێ","id":331,"lastName":"علي","lotteryNumber":328823,"middleName":"ئازاد","result":"فائز"},
+  {"birthYear":1992,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"بةهار","gender":"مێ","id":332,"lastName":"عبدالله","lotteryNumber":330293,"middleName":"علي","result":"فائز"},
+  {"birthYear":2001,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شاجوان","gender":"مێ","id":333,"lastName":"احمد","lotteryNumber":325028,"middleName":"طه","result":"فائز"},
+  {"birthYear":2001,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شةوبو","gender":"مێ","id":334,"lastName":"عبدالقادر","lotteryNumber":298840,"middleName":"على","result":"فائز"},
+  {"birthYear":1997,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"نةبةز","gender":"نێر","id":335,"lastName":"علي","lotteryNumber":333699,"middleName":"ازاد","result":"فائز"},
+  {"birthYear":1998,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سروشت","gender":"مێ","id":336,"lastName":"حمد","lotteryNumber":335257,"middleName":"مصطفى","result":"فائز"},
   {"birthYear":2003,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"راميار","gender":"نێر","id":337,"lastName":"عزيز","lotteryNumber":330752,"middleName":"عبدالله","result":"فائز"},
   {"birthYear":1999,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"روشن","gender":"مێ","id":338,"lastName":"احمد","lotteryNumber":348642,"middleName":"حميد","result":"فائز"},
   {"birthYear":2005,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"نةيفان","gender":"مێ","id":339,"lastName":"حسن","lotteryNumber":388034,"middleName":"صادق","result":"فائز"},
-  {"birthYear":1991,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شنو","gender":"مێ","id":340,"lastName":"ابراهيم","lotteryNumber":388964,"middleName":"علي","result":"فائز"},
+  {"birthYear":1991,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شنو","gender":"مێ","id":340,"lastName":"ابراهيم","lotteryNumber":388964,"middleName":"علي","result":"فائز"},
   {"birthYear":2002,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ساية","gender":"مێ","id":341,"lastName":"عبدالرحمن","lotteryNumber":433817,"middleName":"سليمان","result":"فائز"},
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"شانيل","gender":"نێر","id":342,"lastName":"حسين","lotteryNumber":400948,"middleName":"امير","result":"فائز"},
-  {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"بةخشان","gender":"مێ","id":343,"lastName":"حاجي","lotteryNumber":397596,"middleName":"عبدالله","result":"فائز"},
-  {"birthYear":1996,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ريبند","gender":"نێر","id":344,"lastName":"رسول","lotteryNumber":410364,"middleName":"عثمان","result":"فائز"},
-  {"birthYear":1999,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سةحةر","gender":"مێ","id":345,"lastName":"محمود","lotteryNumber":411450,"middleName":"ريبوار","result":"فائز"},
-  {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"جيهان","gender":"مێ","id":346,"lastName":"رشيد","lotteryNumber":441544,"middleName":"كاكة","result":"فائز"},
-  {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"جه مه ن","gender":"مێ","id":347,"lastName":"حسن","lotteryNumber":412780,"middleName":"احمد","result":"فائز"},
+  {"birthYear":1997,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"بةخشان","gender":"مێ","id":343,"lastName":"حاجي","lotteryNumber":397596,"middleName":"عبدالله","result":"فائز"},
+  {"birthYear":1996,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ريبند","gender":"نێر","id":344,"lastName":"رسول","lotteryNumber":410364,"middleName":"عثمان","result":"فائز"},
+  {"birthYear":1999,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سةحةر","gender":"مێ","id":345,"lastName":"محمود","lotteryNumber":411450,"middleName":"ريبوار","result":"فائز"},
+  {"birthYear":1997,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"جيهان","gender":"مێ","id":346,"lastName":"رشيد","lotteryNumber":441544,"middleName":"كاكة","result":"فائز"},
+  {"birthYear":2001,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"جه مه ن","gender":"مێ","id":347,"lastName":"حسن","lotteryNumber":412780,"middleName":"احمد","result":"فائز"},
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"شينى","gender":"مێ","id":348,"lastName":"ميراحمد","lotteryNumber":413004,"middleName":"ميرة","result":"فائز"},
   {"birthYear":1999,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"شيماء","gender":"مێ","id":349,"lastName":"حسن","lotteryNumber":443629,"middleName":"حجي","result":"فائز"},
   {"birthYear":1990,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"كاروخ","gender":"نێر","id":350,"lastName":"مام كاك","lotteryNumber":470965,"middleName":"خدر","result":"فائز"},
@@ -6623,41 +6654,41 @@ document.addEventListener('DOMContentLoaded', () => {
   {"birthYear":1989,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ئةيهةن","gender":"مێ","id":356,"lastName":"حمدامين","lotteryNumber":447556,"middleName":"رسول","result":"فائز"},
   {"birthYear":1998,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"بةسوز","gender":"مێ","id":357,"lastName":"محمدامين","lotteryNumber":449038,"middleName":"حمةصديق","result":"فائز"},
   {"birthYear":1989,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"فاطمة","gender":"مێ","id":358,"lastName":"ابراهيم","lotteryNumber":458785,"middleName":"احمد","result":"فائز"},
-  {"birthYear":1993,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ئاشنا","gender":"مێ","id":359,"lastName":"محمد","lotteryNumber":465996,"middleName":"عمر","result":"فائز"},
+  {"birthYear":1993,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ئاشنا","gender":"مێ","id":359,"lastName":"محمد","lotteryNumber":465996,"middleName":"عمر","result":"فائز"},
   {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"هيلين","gender":"مێ","id":360,"lastName":"محمود","lotteryNumber":494901,"middleName":"اسماعيل","result":"فائز"},
-  {"birthYear":1986,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ئازوان","gender":"نێر","id":361,"lastName":"محمد","lotteryNumber":541144,"middleName":"كريم","result":"فائز"},
+  {"birthYear":1986,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ئازوان","gender":"نێر","id":361,"lastName":"محمد","lotteryNumber":541144,"middleName":"كريم","result":"فائز"},
   {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ريزيان","gender":"مێ","id":362,"lastName":"عبدالله","lotteryNumber":531933,"middleName":"نجم","result":"فائز"},
-  {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"فاريا","gender":"مێ","id":363,"lastName":"حسن","lotteryNumber":557712,"middleName":"امانج","result":"فائز"},
-  {"birthYear":2004,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سازان","gender":"مێ","id":364,"lastName":"امين","lotteryNumber":520882,"middleName":"محمد","result":"فائز"},
-  {"birthYear":1995,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"رةوةند","gender":"نێر","id":365,"lastName":"احمد","lotteryNumber":521981,"middleName":"محمد","result":"فائز"},
-  {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"جرا","gender":"مێ","id":366,"lastName":"رسول","lotteryNumber":524921,"middleName":"محمد","result":"فائز"},
+  {"birthYear":2000,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"فاريا","gender":"مێ","id":363,"lastName":"حسن","lotteryNumber":557712,"middleName":"امانج","result":"فائز"},
+  {"birthYear":2004,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سازان","gender":"مێ","id":364,"lastName":"امين","lotteryNumber":520882,"middleName":"محمد","result":"فائز"},
+  {"birthYear":1995,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"رةوةند","gender":"نێر","id":365,"lastName":"احمد","lotteryNumber":521981,"middleName":"محمد","result":"فائز"},
+  {"birthYear":1997,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"جرا","gender":"مێ","id":366,"lastName":"رسول","lotteryNumber":524921,"middleName":"محمد","result":"فائز"},
   {"birthYear":1999,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"كةزان","gender":"مێ","id":367,"lastName":"خضر","lotteryNumber":548823,"middleName":"حمد","result":"فائز"},
   {"birthYear":1998,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"زيريفان","gender":"مێ","id":368,"lastName":"فقيابراهيم","lotteryNumber":549663,"middleName":"رزكار","result":"فائز"},
-  {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"هيمن","gender":"نێر","id":369,"lastName":"حسن","lotteryNumber":573399,"middleName":"محمد","result":"فائز"},
-  {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شاناز","gender":"مێ","id":370,"lastName":"سعيد","lotteryNumber":604085,"middleName":"اكو","result":"فائز"},
-  {"birthYear":1991,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ئاشنا","gender":"مێ","id":371,"lastName":"حسن","lotteryNumber":591777,"middleName":"ابراهيم","result":"فائز"},
+  {"birthYear":2001,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"هيمن","gender":"نێر","id":369,"lastName":"حسن","lotteryNumber":573399,"middleName":"محمد","result":"فائز"},
+  {"birthYear":2000,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"شاناز","gender":"مێ","id":370,"lastName":"سعيد","lotteryNumber":604085,"middleName":"اكو","result":"فائز"},
+  {"birthYear":1991,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ئاشنا","gender":"مێ","id":371,"lastName":"حسن","lotteryNumber":591777,"middleName":"ابراهيم","result":"فائز"},
   {"birthYear":2003,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"ئامادەی","firstNmae":"شين","gender":"مێ","id":372,"lastName":"حمةامين","lotteryNumber":560186,"middleName":"عمر","result":"فائز"},
   {"birthYear":2003,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ئاكام","gender":"نێر","id":373,"lastName":"حمة","lotteryNumber":560417,"middleName":"امير","result":"فائز"},
-  {"birthYear":2004,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ليزان","gender":"نێر","id":374,"lastName":"خضر","lotteryNumber":605853,"middleName":"غفور","result":"فائز"},
-  {"birthYear":1985,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"نيكار","gender":"مێ","id":375,"lastName":"اسماعيل","lotteryNumber":600213,"middleName":"رضا","result":"فائز"},
-  {"birthYear":1987,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سمكو","gender":"نێر","id":376,"lastName":"رسول","lotteryNumber":560732,"middleName":"بكر","result":"فائز"},
+  {"birthYear":2004,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"ليزان","gender":"نێر","id":374,"lastName":"خضر","lotteryNumber":605853,"middleName":"غفور","result":"فائز"},
+  {"birthYear":1985,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"نيكار","gender":"مێ","id":375,"lastName":"اسماعيل","lotteryNumber":600213,"middleName":"رضا","result":"فائز"},
+  {"birthYear":1987,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سمكو","gender":"نێر","id":376,"lastName":"رسول","lotteryNumber":560732,"middleName":"بكر","result":"فائز"},
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"هيدى","gender":"نێر","id":377,"lastName":"محمد امين","lotteryNumber":606221,"middleName":"عبدالرحمن","result":"فائز"},
-  {"birthYear":1991,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"اسماعيل","gender":"نێر","id":378,"lastName":"محمد","lotteryNumber":561271,"middleName":"عثمان","result":"فائز"},
+  {"birthYear":1991,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"اسماعيل","gender":"نێر","id":378,"lastName":"محمد","lotteryNumber":561271,"middleName":"عثمان","result":"فائز"},
   {"birthYear":1995,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"فه","gender":"مێ","id":379,"lastName":"احمد","lotteryNumber":589016,"middleName":"خدر","result":"فائز"},
   {"birthYear":1999,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ئةوين","gender":"مێ","id":380,"lastName":"احمد","lotteryNumber":589359,"middleName":"خدر","result":"فائز"},
   {"birthYear":2005,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"ئامادەی","firstNmae":"ئافيستا","gender":"مێ","id":381,"lastName":"احمد","lotteryNumber":589778,"middleName":"خدر","result":"فائز"},
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"كارين","gender":"مێ","id":382,"lastName":"قادر","lotteryNumber":617758,"middleName":"احمد","result":"فائز"},
-  {"birthYear":1999,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سمية","gender":"مێ","id":383,"lastName":"حامد","lotteryNumber":618466,"middleName":"حمةزياد","result":"فائز"},
+  {"birthYear":1999,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"سمية","gender":"مێ","id":383,"lastName":"حامد","lotteryNumber":618466,"middleName":"حمةزياد","result":"فائز"},
   {"birthYear":2004,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"ئامادەی","firstNmae":"زيكار","gender":"نێر","id":384,"lastName":"حسن","lotteryNumber":622000,"middleName":"رزكار","result":"فائز"},
   {"birthYear":2004,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"ئامادەی","firstNmae":"بوكان","gender":"مێ","id":385,"lastName":"زرار","lotteryNumber":581839,"middleName":"سليم","result":"فائز"},
   {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"مه زرا","gender":"مێ","id":386,"lastName":"حمة","lotteryNumber":619706,"middleName":"همزة","result":"فائز"},
-  {"birthYear":2003,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"دياكو","gender":"نێر","id":387,"lastName":"رسول","lotteryNumber":625455,"middleName":"مصطفى","result":"فائز"},
-  {"birthYear":2002,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"هيفار","gender":"مێ","id":388,"lastName":"رسول","lotteryNumber":651456,"middleName":"جل","result":"فائز"},
+  {"birthYear":2003,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"دياكو","gender":"نێر","id":387,"lastName":"رسول","lotteryNumber":625455,"middleName":"مصطفى","result":"فائز"},
+  {"birthYear":2002,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"هيفار","gender":"مێ","id":388,"lastName":"رسول","lotteryNumber":651456,"middleName":"جل","result":"فائز"},
   {"birthYear":1989,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"نه مام","gender":"مێ","id":389,"lastName":"محمد","lotteryNumber":621634,"middleName":"عمر","result":"فائز"},
-  {"birthYear":1987,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"عمر","gender":"نێر","id":390,"lastName":"احمد","lotteryNumber":652192,"middleName":"عزيز","result":"فائز"},
-  {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"مه به ست","gender":"نێر","id":391,"lastName":"اسماعيل","lotteryNumber":659308,"middleName":"عبدالله","result":"فائز"},
+  {"birthYear":1987,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"عمر","gender":"نێر","id":390,"lastName":"احمد","lotteryNumber":652192,"middleName":"عزيز","result":"فائز"},
+  {"birthYear":2001,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"مه به ست","gender":"نێر","id":391,"lastName":"اسماعيل","lotteryNumber":659308,"middleName":"عبدالله","result":"فائز"},
   {"birthYear":2003,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"ئامادەی","firstNmae":"هيلين","gender":"مێ","id":392,"lastName":"سليم","lotteryNumber":659873,"middleName":"كريم","result":"فائز"},
-  {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"جراخان","gender":"مێ","id":393,"lastName":"سليم","lotteryNumber":659937,"middleName":"كريم","result":"فائز"},
+  {"birthYear":2000,"category":"دەرچووی خوێندکاری پەیمانگا","centerName":"رانيه - 1","centerNumber":1287,"education":"دبلوم","firstNmae":"جراخان","gender":"مێ","id":393,"lastName":"سليم","lotteryNumber":659937,"middleName":"كريم","result":"فائز"},
   {"birthYear":1987,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"جرو","gender":"مێ","id":394,"lastName":"محمد","lotteryNumber":653323,"middleName":"عمر","result":"فائز"},
   {"birthYear":1999,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"ريا","gender":"مێ","id":395,"lastName":"عبدالرحمان","lotteryNumber":655999,"middleName":"سليمان","result":"فائز"},
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"رانيه - 1","centerNumber":1287,"education":"بەكالوريوس","firstNmae":"هافان","gender":"مێ","id":396,"lastName":"فقي ابراهيم","lotteryNumber":657803,"middleName":"رزكار","result":"فائز"},
@@ -11722,8 +11753,8 @@ document.addEventListener('DOMContentLoaded', () => {
   {"birthYear":1991,"category":"فەرمانبەری حکومەت","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"دبلوم","firstNmae":"سفين","gender":"نێر","id":249,"lastName":"وتمان","lotteryNumber":658324,"middleName":"محمد","result":"فائز"},
   {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"بەكالوريوس","firstNmae":"مهربان","gender":"مێ","id":250,"lastName":"محمد","lotteryNumber":43642,"middleName":"محمود","result":"فائز"},
   {"birthYear":1990,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"بەكالوريوس","firstNmae":"ئاوات","gender":"نێر","id":251,"lastName":"حسين","lotteryNumber":58226,"middleName":"خدر","result":"فائز"},
-  {"birthYear":2002,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"بەكالوريوس","firstNmae":"هوشيار","gender":"نێر","id":252,"lastName":"محمد","lotteryNumber":76223,"middleName":"حسين","result":"فائز"},
-  {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"بەكالوريوس","firstNmae":"با","gender":"مێ","id":253,"lastName":"مصطفى","lotteryNumber":160516,"middleName":"محمد","result":"فائز"},
+  {"birthYear":2002,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"بەكالوريوس","firstNmae":"هۆشيار","gender":"نێر","id":252,"lastName":"محمد","lotteryNumber":76223,"middleName":"حسين","result":"فائز"},
+  {"birthYear":1997,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"بەكالوريوس","firstNmae":"باڵا","gender":"مێ","id":253,"lastName":"مصطفى","lotteryNumber":160516,"middleName":"محمد","result":"فائز"},
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"بەكالوريوس","firstNmae":"دانا","gender":"نێر","id":254,"lastName":"محمود","lotteryNumber":130211,"middleName":"حاجي","result":"فائز"},
   {"birthYear":2001,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"دبلوم","firstNmae":"شاجوان","gender":"مێ","id":255,"lastName":"رسو","lotteryNumber":168116,"middleName":"حسن","result":"فائز"},
   {"birthYear":2005,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 2","centerNumber":2289,"education":"ئامادەی","firstNmae":"محمد","gender":"نێر","id":256,"lastName":"ابراهيم","lotteryNumber":148424,"middleName":"حميد","result":"فائز"},
@@ -13490,29 +13521,43 @@ document.addEventListener('DOMContentLoaded', () => {
   {"birthYear":2000,"category":"خوێندکاری دەرچووی زانکۆ","centerName":"قلعة دزه - 5","centerNumber":5289,"education":"بەكالوريوس","firstNmae":"ئةازين","gender":"مێ","id":18,"lastName":"رسول","lotteryNumber":541001,"middleName":"عثمان","result":"فائز"}
     ]; }
     
-const applyLotteryFiltersAndSort = () => {
-    let filteredData = lotteryData;
+    const applyLotteryFiltersAndSort = () => {
     const searchTerm = normalizeNumerals(lotterySearchInput.value.toLowerCase().trim());
-
-    if (selectedEducation !== 'all') filteredData = filteredData.filter(p => p.education === selectedEducation);
-    if (selectedGender !== 'all') filteredData = filteredData.filter(p => p.gender === selectedGender);
-    if (birthYearFrom !== 'all') filteredData = filteredData.filter(p => p.birthYear >= parseInt(birthYearFrom));
-    if (birthYearTo !== 'all') filteredData = filteredData.filter(p => p.birthYear <= parseInt(birthYearTo));
-
-    // --- گۆڕانکارییەکە لێرەدایە ---
-    // گەڕان کاردەکات کاتێک ٣ پیت یان زیاتر بێت
-    if (searchTerm.length >= 3) {
-        filteredData = filteredData.filter(p => {
-            // دروستکردنی ناوی تەواو لە سێ بەشەکە
-            const fullName = `${p.firstNmae || ''} ${p.middleName || ''} ${p.lastName || ''}`.toLowerCase();
-            return fullName.includes(searchTerm) ||
-                normalizeNumerals(String(p.lotteryNumber)).includes(searchTerm) ||
-                normalizeNumerals(String(p.id)).includes(searchTerm);
-        });
+    
+    // چەکردن کە ئایا گەڕان بەشی پێویست هەیە (لانی کەم ٥ پیت)
+    const hasMinSearchLength = searchTerm.length >= 5;
+    
+    // ئەگەر گەڕان کەمتر لە ٥ پیت بێت، هیچ فلتەرێک جێبەجێ مەکە
+    if (!hasMinSearchLength) {
+        renderLotteryResults(lotteryData.slice(0, 50), '');
+        lotteryFilteredStatHeader.textContent = `بینینی ٥٠ لە کۆی ${lotteryData.length} ئەنجام (بۆ گەڕان لانی کەم ٥ پیت بنووسە)`;
+        return;
     }
-    // --- کۆتایی گۆڕانکاریی یەکەم ---
-
-    // --- گۆڕانکاریی دووەم لێرەدایە ---
+    
+    // ئێستا هەموو فلتەرەکان جێبەجێ بکە
+    let filteredData = lotteryData;
+    
+    // فلتەری پۆلی خوێندن
+    if (selectedEducation !== 'all') filteredData = filteredData.filter(p => p.education === selectedEducation);
+    
+    // فلتەری ڕەگەز
+    if (selectedGender !== 'all') filteredData = filteredData.filter(p => p.gender === selectedGender);
+    
+    // فلتەری ساڵی لەدایکبوون (لە)
+    if (birthYearFrom !== 'all') filteredData = filteredData.filter(p => p.birthYear >= parseInt(birthYearFrom));
+    
+    // فلتەری ساڵی لەدایکبوون (بۆ)
+    if (birthYearTo !== 'all') filteredData = filteredData.filter(p => p.birthYear <= parseInt(birthYearTo));
+    
+    // فلتەری گەڕان (ناو، ژمارەی یانەی، ID)
+    filteredData = filteredData.filter(p => {
+        const fullName = `${p.firstNmae || ''} ${p.middleName || ''} ${p.lastName || ''}`.toLowerCase();
+        return fullName.includes(searchTerm) ||
+            normalizeNumerals(String(p.lotteryNumber)).includes(searchTerm) ||
+            normalizeNumerals(String(p.id)).includes(searchTerm);
+    });
+    
+    // ڕێکخستن
     filteredData.sort((a, b) => {
         switch (sortBy) {
             case 'lotteryNumber_desc':
@@ -13530,23 +13575,96 @@ const applyLotteryFiltersAndSort = () => {
                 return a.lotteryNumber - b.lotteryNumber;
         }
     });
-    // --- کۆتایی گۆڕانکاریی دووەم ---
-
-    let dataToRender = filteredData;
-
-    const isFiltered = selectedEducation !== 'all' ||
-        selectedGender !== 'all' ||
-        birthYearFrom !== 'all' ||
-        birthYearTo !== 'all' ||
-        searchTerm.length >= 3;
-
-    if (!isFiltered) {
-        dataToRender = filteredData.slice(0, 50);
-    }
-
+    
+    // ڕێکخستن
+    filteredData.sort((a, b) => {
+        switch (sortBy) {
+            case 'lotteryNumber_desc':
+                return b.lotteryNumber - a.lotteryNumber;
+            case 'name_asc':
+                // ڕێکخستن بەپێی ناوی تەواو
+                const fullNameA = `${a.firstNmae || ''} ${a.middleName || ''} ${a.lastName || ''}`;
+                const fullNameB = `${b.firstNmae || ''} ${b.middleName || ''} ${b.lastName || ''}`;
+                return fullNameA.localeCompare(fullNameB, 'ku');
+            case 'birthYear_desc':
+                return b.birthYear - a.birthYear;
+            case 'birthYear_asc':
+                return a.birthYear - b.birthYear;
+            default:
+                return a.lotteryNumber - b.lotteryNumber;
+        }
+    });
+    
+    // سنووردارکردنی ئەنجامەکان بۆ بەرزکردنەوەی کارایی
+    const maxResults = 50; // لانی زۆر ١٠٠ ئەنجام نیشان بدە
+    const dataToRender = filteredData.slice(0, maxResults);
+    
     renderLotteryResults(dataToRender, searchTerm);
-    lotteryFilteredStatHeader.textContent = `بینینی ${dataToRender.length} لە کۆی ${filteredData.length} ئەنجام`;
+    
+    // نیشاندانی زانیاریی ئەنجامەکان
+    if (filteredData.length > maxResults) {
+        lotteryFilteredStatHeader.textContent = `بینینی یەکەم ${maxResults} لە کۆی ${filteredData.length} ئەنجام`;
+    } else {
+        lotteryFilteredStatHeader.textContent = `بینینی ${filteredData.length} ئەنجام لە کۆی ${lotteryData.length} داتا`;
+    }
 };
+// const applyLotteryFiltersAndSort = () => {
+//     let filteredData = lotteryData;
+//     const searchTerm = normalizeNumerals(lotterySearchInput.value.toLowerCase().trim());
+
+//     if (selectedEducation !== 'all') filteredData = filteredData.filter(p => p.education === selectedEducation);
+//     if (selectedGender !== 'all') filteredData = filteredData.filter(p => p.gender === selectedGender);
+//     if (birthYearFrom !== 'all') filteredData = filteredData.filter(p => p.birthYear >= parseInt(birthYearFrom));
+//     if (birthYearTo !== 'all') filteredData = filteredData.filter(p => p.birthYear <= parseInt(birthYearTo));
+
+//     // --- گۆڕانکارییەکە لێرەدایە ---
+//     // گەڕان کاردەکات کاتێک ٣ پیت یان زیاتر بێت
+//     if (searchTerm.length >= 3) {
+//         filteredData = filteredData.filter(p => {
+//             // دروستکردنی ناوی تەواو لە سێ بەشەکە
+//             const fullName = `${p.firstNmae || ''} ${p.middleName || ''} ${p.lastName || ''}`.toLowerCase();
+//             return fullName.includes(searchTerm) ||
+//                 normalizeNumerals(String(p.lotteryNumber)).includes(searchTerm) ||
+//                 normalizeNumerals(String(p.id)).includes(searchTerm);
+//         });
+//     }
+//     // --- کۆتایی گۆڕانکاریی یەکەم ---
+
+//     // --- گۆڕانکاریی دووەم لێرەدایە ---
+//     filteredData.sort((a, b) => {
+//         switch (sortBy) {
+//             case 'lotteryNumber_desc':
+//                 return b.lotteryNumber - a.lotteryNumber;
+//             case 'name_asc':
+//                 // ڕێکخستن بەپێی ناوی تەواو
+//                 const fullNameA = `${a.firstNmae || ''} ${a.middleName || ''} ${a.lastName || ''}`;
+//                 const fullNameB = `${b.firstNmae || ''} ${b.middleName || ''} ${b.lastName || ''}`;
+//                 return fullNameA.localeCompare(fullNameB, 'ku');
+//             case 'birthYear_desc':
+//                 return b.birthYear - a.birthYear;
+//             case 'birthYear_asc':
+//                 return a.birthYear - b.birthYear;
+//             default:
+//                 return a.lotteryNumber - b.lotteryNumber;
+//         }
+//     });
+//     // --- کۆتایی گۆڕانکاریی دووەم ---
+
+//     let dataToRender = filteredData;
+
+//     const isFiltered = selectedEducation !== 'all' ||
+//         selectedGender !== 'all' ||
+//         birthYearFrom !== 'all' ||
+//         birthYearTo !== 'all' ||
+//         searchTerm.length >= 3;
+
+//     if (!isFiltered) {
+//         dataToRender = filteredData.slice(0, 50);
+//     }
+
+//     renderLotteryResults(dataToRender, searchTerm);
+//     lotteryFilteredStatHeader.textContent = `بینینی ${dataToRender.length} لە کۆی ${filteredData.length} ئەنجام`;
+// };
 
 
 const renderLotteryResults = (results, searchTerm) => {
